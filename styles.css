@@ -1,0 +1,46 @@
+/* Custom styles for BYD Cars Philippines */
+
+/* Use Montserrat font family globally */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Scrollbar styling for better UX */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #3b82f6; /* Tailwind blue-500 */
+  border-radius: 10px;
+  border: 2px solid #f1f1f1;
+}
+
+/* Details summary marker customization */
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details > summary::before {
+  content: "▶";
+  display: inline-block;
+  margin-right: 0.5rem;
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+details[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+/* Smooth transition for details content */
+details > p {
+  transition: max-height 0.3s ease;
+}
