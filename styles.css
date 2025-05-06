@@ -44,3 +44,10 @@ details[open] > summary::before {
 details > p {
   transition: max-height 0.3s ease;
 }
+body > div { /* Selects direct div children of the body */
+  width: 100%;
+}
+
+body > header { /* Selects the direct header child */
+  width: 100%;
+}
