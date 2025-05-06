@@ -24,13 +24,33 @@
         <a href="#" class="inline-block bg-blue-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-blue-700 transition">ACCEPT</a>
     </div>
 
-    <header class="max-w-7xl mx-auto px-4 py-6 flex items-center justify-between">
-        <a href="/" aria-label="JMA Motorcycle Philippines Home">
-            <span class="text-xl font-bold">JMA Motorcycle PH</span>
+    <header class="max-w-7xl mx-auto px-4 py-4 md:py-6 flex items-center justify-between bg-white shadow-sm sticky top-0 z-40">
+        <a href="/" aria-label="JMA Motorcycle Philippines Home" class="flex items-center">
+             <img src="JMA MOTO logo.jpg" alt="JMA Motorcycle Logo" class="h-8 md:h-10 mr-3">
+             <span class="text-xl md:text-2xl font-bold text-gray-900">JMA Motorcycle | MAKE IT HAPPEN</span>
         </a>
-        </header>
+        <nav class="hidden md:flex space-x-6 lg:space-x-8">
+            <a href="/" class="text-gray-600 hover:text-blue-600 transition duration-200">Home</a>
+            <a href="/all-vehicles.html" class="text-gray-600 hover:text-blue-600 transition duration-200">Vehicles</a>
+            <a href="/blog.html" class="text-gray-600 hover:text-blue-600 transition duration-200">Blog</a>
+            <a href="/about" class="text-gray-600 hover:text-blue-600 transition duration-200">About</a>
+             <a href="/contact" class="text-gray-600 hover:text-blue-600 transition duration-200">Contact</a>
+        </nav>
+        <button class="md:hidden text-gray-600 hover:text-blue-600 focus:outline-none">
+            <i class="fas fa-bars text-xl"></i>
+        </button>
+         <div class="absolute top-full left-0 w-full bg-white shadow-lg md:hidden hidden">
+             <nav class="flex flex-col space-y-2 px-4 py-3">
+                 <a href="/" class="block text-gray-800 hover:text-blue-600 py-1">Home</a>
+                 <a href="/all-vehicles" class="block text-gray-800 hover:text-blue-600 py-1">Vehicles</a>
+                 <a href="/blog" class="block text-gray-800 hover:text-blue-600 py-1">Blog</a>
+                 <a href="/about" class="block text-gray-800 hover:text-blue-600 py-1">About</a>
+                 <a href="/contact" class="block text-gray-800 hover:text-blue-600 py-1">Contact</a>
+             </nav>
+         </div>
+    </header>
 
-    <main class="max-w-7xl mx-auto px-4 py-16">
+    <section class="max-w-7xl mx-auto px-4 py-16">
         <h1 class="text-4xl md:text-5xl font-bold mb-4 text-center">Our Full Motorcycle Range</h1>
         <p class="mb-12 text-center text-gray-700 max-w-3xl mx-auto">Explore all the models available from JMA Motorcycle Philippines. Find the perfect ride for your needs and budget.</p>
 
@@ -182,3 +202,40 @@
                     </div>
                 </div>
             </article>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-300 py-12 px-4"> <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8"> <div>
+        <h3 class="text-lg font-bold text-white mb-4">JMA Motorcycle</h3>
+        <p class="text-sm leading-relaxed">Bringing high-performance motorcycles to the Philippines. Experience the ride of a lifetime with our diverse range of models.</p>
+    </div>
+    <div>
+        <h3 class="text-lg font-bold text-white mb-4">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+            <li><a href="/" class="hover:text-blue-500 transition duration-200">Home</a></li>
+            <li><a href="/all-vehicles.html" class="hover:text-blue-500 transition duration-200">Vehicles</a></li>
+            <li><a href="/blog.html" class="hover:text-blue-500 transition duration-200">Blog</a></li>
+            <li><a href="/about" class="hover:text-blue-500 transition duration-200">About Us</a></li>
+            <li><a href="/contact" class="hover:text-blue-500 transition duration-200">Contact</a></li>
+        </ul>
+    </div>
+     <div>
+        <h3 class="text-lg font-bold text-white mb-4">Legal</h3>
+        <ul class="space-y-2 text-sm">
+            <li><a href="/privacy-policy" class="hover:text-blue-500 transition duration-200">Privacy Policy</a></li>
+            <li><a href="/terms-of-service" class="hover:text-blue-500 transition duration-200">Terms of Service</a></li>
+            </ul>
+    </div>
+     <div>
+        <h3 class="text-lg font-bold text-white mb-4">Connect</h3>
+        <div class="flex space-x-4 text-xl">
+            <a href="#" class="hover:text-blue-500 transition duration-200" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a>
+            <a href="#" class="hover:text-blue-500 transition duration-200" aria-label="Instagram"><i class="fab fa-instagram-square"></i></a>
+            <a href="#" class="hover:text-blue-500 transition duration-200" aria-label="Twitter"><i class="fab fa-twitter-square"></i></a>
+            <a href="#" class="hover:text-blue-500 transition duration-200" aria-label="YouTube"><i class="fab fa-youtube-square"></i></a>
+        </div>
+         <p class="mt-4 text-sm">&copy; 2025 JMA Motorcycle Philippines. All rights reserved.</p> </div>
+</div>
+ <div class="text-center mt-8 text-gray-500 text-sm">
+     <p>Proudly serving the Philippine riding community.</p>
+ </div>
+</footer>
