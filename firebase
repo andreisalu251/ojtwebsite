@@ -1,32 +1,41 @@
-const firebaseConfig = {
-    apiKey: " ",
-    authDomain: "jma-motorcycles-sales-inc.firebaseapp.com",
-    projectId: "jma-motorcycles-sales-inc",
-    storageBucket: "jma-motorcycles-sales-inc.firebasestorage.app",
-    messagingSenderId: "326225043486",
-    appId: "1:326225043486:web:c72145ea9cf410be1f4e0f",
-    measurementId: "G-2NJVW60VDG"
-  };
-// Initialize Firebase app
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-// Get Firestore reference
 const db = firebase.firestore();
+const storage = firebase.storage(); // Add storage reference
 
-// Example data object from form inputs
+// Example of photo upload + form submission
+async function submitFormWithPhoto(formData, file) {
+  try {
+    // 1. Upload photo
+    const storageRef = storage.ref();
+    const filePath = `id_photos/${Date.now()}_${file.name}`;
+    const fileRef = storageRef.child(filePath);
+    await fileRef.put(file);
+    
+    // 2. Get download URL
+    const photoUrl = await fileRef.getDownloadURL();
+    
+    // 3. Add URL to form data
+    const completeData = {
+      ...formData,
+      idPhotoUrl: photoUrl,
+      submittedAt: new Date().toISOString()
+    };
+    
+    // 4. Submit to Firestore
+    await db.collection('motorcycleApplications').add(completeData);
+    console.log("Application submitted with photo!");
+  } catch (error) {
+    console.error("Submission error:", error);
+  }
+}
+
+// Usage example
 const formData = {
   fullName: "John Doe",
   email: "john@example.com",
-  phone: "+1234567890",
-  address: "123 Main St",
-  motorcycleModel: "Yamaha YZF-R3",
-  submittedAt: new Date().toISOString()
+  // ... other fields
 };
-// Add data to Firestore collection "motorcycleApplications"
-db.collection('motorcycleApplications')
-  .add(formData)
-  .then(() => {
-    console.log("Application successfully submitted!");
-  })
-  .catch((error) => {
-    console.error("Error adding document: ", error);
-  });
+
+const fileInput = document.getElementById('idPhotoInput');
+submitFormWithPhoto(formData, fileInput.files[0]);
