@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JMA Motorcycle Sales Inc. | MAKE IT HAPPEN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* Optional: Add some custom styles if needed, otherwise rely on Tailwind */
+        /* For example, adding a simple transition for the FAQ chevron */
+        details summary::before {
+            content: "\f054"; /* FontAwesome chevron-right */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            margin-right: 0.75rem; /* mr-3 */
+            transition: transform 0.2s ease-in-out;
+            display: inline-block;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        details summary {
+             list-style: none; /* Remove default marker */
+        }
+        details summary::-webkit-details-marker {
+            display: none; /* Remove default marker in Webkit browsers */
+        }
+
+        /* Add a subtle background pattern or gradient */
+        .section-bg-pattern {
+             background-image: linear-gradient(to bottom right, rgba(243, 244, 246, 0.6), rgba(229, 231, 235, 0.6)); /* bg-gray-100 with transparency */
+        }
+         .hero-bg {
+            background: linear-gradient(to bottom, rgba(14, 12, 12, 0.8), rgba(128, 25, 25, 0.8)), url('path/to/your/hero-image.jpg') center/cover no-repeat; /* Add your hero image path */
+            /* Fallback background if image is not available */
+            background-color: #1f2937; /* dark gray/blue */
+            color: white; /* Ensure text is readable */
+        }
+        .hero-bg h1, .hero-bg p, .hero-bg a {
+            color: white; /* Ensure text on hero is white */
+        }
+        body {
+            margin: 0; /* Remove default body margins */
+        }
+        
+        /* Map section styles */
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 300px;
+            z-index: 100;
+        }
+        
+        .branch-card {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .branch-card:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .branch-card:hover {
+            background: #f9f9f9;
+            transform: translateX(5px);
+        }
+        
+        .branch-card.active {
+            background: #f0f7ff;
+            border-left: 3px solid #0052cc;
+        }
+        
+        .branch-card h4 {
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #222;
+        }
+        
+        .branch-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0;
+        }
+        
+        .map-controls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .map-btn {
+            background: #0052cc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .map-btn:last-child {
+            margin-bottom: 0;
+        }
+        
+        .map-btn i {
+            margin-right: 8px;
+        }
+        
+        .map-btn:hover {
+            background: #003d99;
+        }
+        
+        .branch-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .branch-info-detail {
+            flex: 1;
+            padding: 0 15px;
+        }
+        
+        .branch-info-detail:first-child {
+            padding-left: 0;
+        }
+        
+        .branch-info-detail:last-child {
+            padding-right: 0;
+        }
+        
+        .branch-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #222;
+        }
+        
+        .branch-info p {
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .branch-info a {
+            color: #0052cc;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .branch-info a:hover {
+            text-decoration: underline;
+        }
+        
+        .directions-btn {
+            display: inline-block;
+            background: #a35050;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .directions-btn:hover {
+            background: #6b717a;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .map-overlay {
+                max-width: 100%;
+                top: auto;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                border-radius: 0;
+            }
+            
+            .branch-info {
+                flex-direction: column;
+            }
+            
+            .branch-info-detail {
+                padding: 15px 0;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .branch-info-detail:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+        }
+
+    </style>
+</head>
+<body class="font-montserrat bg-gray-50 text-gray-800 antialiased"> <div class="fixed bottom-0 left-0 right-0 bg-blue-900 text-white text-sm p-4 flex flex-col md:flex-row items-center justify-between z-50 shadow-lg">
+        <p class="max-w-xl mb-2 md:mb-0 md:mr-4">
+            By clicking “Accept”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts. View our
+            <a href="/privacy-policy" class="text-blue-300 hover:underline font-medium">Privacy Policy</a> for more information.
+        </p>
+        <a href="#" class="inline-block bg-blue-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-600 transition duration-300 ease-in-out shrink-0">ACCEPT</a>
+    </div>
+
+    <header class="max-w-8xl mx-auto px-12 py-4 md:py-6 flex items-center justify-between bg-white shadow-sm sticky top-0 z-40">
+        <a href="/" aria-label="JMA Motorcycle Philippines Home" class="flex items-center">
+             <img src="JMA MOTO logo.jpg" alt="JMA Motorcycle Logo" class="h-8 md:h-10 mr-3">
+             <span class="text-xl md:text-2xl font-bold text-gray-900">JMA Motorcycle | MAKE IT HAPPEN</span>
+        </a>
+        <nav class="hidden md:flex space-x-6 lg:space-x-8">
+            <a href="/" class="text-gray-600 hover:text-blue-600 transition duration-200">Home</a>
+            <a href="/all-vehicles.html" class="text-gray-600 hover:text-blue-600 transition duration-200">Vehicles</a>
+            <a href="/blog.html" class="text-gray-600 hover:text-blue-600 transition duration-200">Blog</a>
+            <a href="/about" class="text-gray-600 hover:text-blue-600 transition duration-200">About</a>
+             <a href="/contact" class="text-gray-600 hover:text-blue-600 transition duration-200">Contact</a>
+        </nav>
+        <button class="md:hidden text-gray-600 hover:text-blue-600 focus:outline-none">
+            <i class="fas fa-bars text-xl"></i>
+        </button>
+         <div class="absolute top-full left-0 w-full bg-white shadow-lg md:hidden hidden">
+             <nav class="flex flex-col space-y-2 px-4 py-3">
+                 <a href="/" class="block text-gray-800 hover:text-blue-600 py-1">Home</a>
+                 <a href="/all-vehicles.html" class="block text-gray-800 hover:text-blue-600 py-1">Vehicles</a>
+                 <a href="/blog.html" class="block text-gray-800 hover:text-blue-600 py-1">Blog</a>
+                 <a href="/about" class="block text-gray-800 hover:text-blue-600 py-1">About</a>
+                 <a href="/contact" class="block text-gray-800 hover:text-blue-600 py-1">Contact</a>
+             </nav>
+         </div>
+    </header>
+
+    <section class="hero-bg py-24 md:py-32 text-center px-4 shadow-xl"> <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight"> Find Your Ride, <br class="md:hidden"> Unleash Your Adventure
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto opacity-90"> Experience the thrill of the road with JMA Motorcycle Sales Inc. We make it happen.
+        </p>
+        <p class="text-xl md:text-2x1 mb-8 max-w-2xl mx-auto opacity-90"> Motorcycle Dealership.
+        </p>
+        <p class="text-xl md:text-2x1 mb-8 max-w-2xl mx-auto opacity-90"> Suzuki, Yamaha, Kymco, Skygo, Monarch, Hero.
+        </p>
+        <a href="/all-vehicles.html" class="inline-block bg-blue-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 shadow-lg"> Explore Listings
+            <i class="fas fa-arrow-right ml-2"></i> </a>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 py-16 md:py-20">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center">Explore Our Range</h2> <p class="mb-12 text-gray-600 max-w-3xl mx-auto text-center text-lg">Discover JMA Motorcycle's diverse range of high-performance motorcycles, designed for every rider.</p> <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"> <article class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 ease-in-out group"> <div class="overflow-hidden"> <img
+                        src="images/Yamaha Aerox_Main.png"
+                        alt="Yamaha Aerox"
+                        class="w-full object-cover h-50 md:h-58 group-hover:scale-110 transition duration-300 ease-in-out" />
+                </div>
+                <div class="p-6 flex flex-col h-full"> 
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Yamaha Aerox</h3> 
+                    <p class="text-gray-600 text-sm mb-1">Sportbike</p> 
+                    <p class="text-gray-700 text-sm mb-3">Liquid-cooled, 4-stroke, SOHC, 4-valve </p> 
+                    <p class="text-xl font-bold text-blue-700 mt-auto mb-4">Starts at ₱181,000</p> 
+                    <div class="flex space-x-4 justify-start"> 
+                        <a href="/vehicles/Yamaha Aerox" class="text-blue-600 hover:text-blue-800 hover:underline font-semibold transition duration-200">VIEW VEHICLE</a>
+                        <a href="/get-a-quote" class="text-blue-600 hover:text-blue-800 hover:underline font-semibold transition duration-200">GET A QUOTE</a>
+                    </div>
+                </div>
+            </article>
+
+             <article class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 ease-in-out group">
+                <div class="overflow-hidden">
+                    <img
+                        src="images/Yamaha NMAX_main.png"
+                        alt="JMA Motorcycle Yamaha NMAX"
+                        class="w-full object-cover h-50 md:h-58 group-hover:scale-110 transition duration-300 ease-in-out"
+                    />
+                </div>
+                <div class="p-6 flex flex-col h-full">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Yamaha NMAX</h3>
+                    <p class="text-gray-600 text-sm mb-1">Scooter</p>
+                    <p class="text-gray-700 text-sm mb-3">Single Cylinder, Liquid-cooled, 4-stroke, SOHC, 4-valve</p>
+                    <p class="text-xl font-bold text-blue-700 mt-auto mb-4">Starts at ₱155,000</p>
+                    <div class="flex space-x-4 justify-start">
+                        <a href="/vehicles/Yamaha-NMAX" class="text-blue-600 hover:text-blue-800 hover:underline font-semibold transition duration-200">VIEW VEHICLE</a>
+                        <a href="/get-a-quote" class="text-blue-600 hover:text-blue-800 hover:underline font-semibold transition duration-200">GET A QUOTE</a>
+                    </div>
+                </div>
+            </article>
+
+             <article class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 ease-in-out group">
+                 <div class="overflow-hidden">
+                    <img
+                        src="images/Yamaha Fassio_Main.png"
+                        alt="JMA Motorcycle Yamaha Fazzio"
+                        class="w-full object-cover h-50 md:h-58 group-hover:scale-110 transition duration-300 ease-in-out"
+                    />
+                 </div>
+                <div class="p-6 flex flex-col h-full">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Yamaha Fazzio</h3>
+                    <p class="text-gray-600 text-sm mb-1">Scooter</p>
+                    <p class="text-gray-700 text-sm mb-3">Air-cooled, 4-stroke, 2 valves, SOHC</p>
+                    <p class="text-xl font-bold text-blue-700 mt-auto mb-4">Starts at ₱93,000</p>
+                    <div class="flex space-x-4 justify-start">
+                        <a href="/vehicles/Yamaha-Fazzio" class="text-blue-600 hover:text-blue-800 hover:underline font-semibold transition duration-200">VIEW VEHICLE</a>
+                        <a href="/get-a-quote" class="text-blue-600 hover:text-blue-800 hover:underline font-semibold transition duration-200">GET A QUOTE</a>
+                    </div>
+                </div>
+            </article>
+            </div>
+        <div class="text-center mt-12"> <a href="/all-vehicles.html" class="inline-flex items-center text-blue-600 font-bold hover:underline text-lg transition duration-200"> VIEW ALL MODELS <i class="fas fa-angle-right ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <section class="hero-bg text-white py-16 md:py-20 px-4 section-bg-pattern"> <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-16"> <div class="md:w-1/2">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">Experience Unmatched Performance and Style</h2> <p class="text-blue-100 mb-6 text-lg"> JMA Motorcycle is dedicated to delivering motorcycles with exceptional performance, cutting-edge technology, and superior design. Feel the thrill of the ride with our latest models.
+                </p>
+                <a href="/about" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition duration-300 ease-in-out shadow-lg"> LEARN MORE ABOUT US
+                </a>
+            </div>
+            <div class="md:w-1/2 relative"> <img
+                    src="images/Yamaha NMAX_Main.png"
+                    alt="Yamaha Aerox"
+                    class="rounded-xl shadow-2xl w-full transform hover:scale-105 transition duration-300 ease-in-out" />
+                 </div>
+        </div>
+    </section>
+    
+    <!-- New Branch Location Section -->
+    <section class="max-w-7xl mx-auto px-4 py-16 md:py-20">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center">Visit Our Branches</h2>
+        <p class="mb-12 text-gray-600 max-w-3xl mx-auto text-center text-lg">
+            Find your nearest JMA Motorcycle branch and experience our premium motorcycles firsthand
+        </p>
+        
+        <div class="relative">
+            <div class="map-container" id="map">
+                <!-- Google Map will be embedded here -->
+            </div>
+            
+            <div class="map-overlay">
+                <h3 class="text-lg font-bold mb-3">Our Branches</h3>
+                <div class="branch-card active" data-lat="14.42775668614773" data-lng="120.91641820960568" data-branch="imus">
+                    <h4>Imus Branch</h4>
+                    <p>Bgy, 2 Advincula Rd, Imus City, Cavite</p>
+                </div>
+                <div class="branch-card" data-lat="14.671979732351216" data-lng="1121.10890499815702" data-branch="marikina">
+                    <h4>Marikina Branch</h4>
+                    <p>J. P. Rizal St, Marikina City, 1808 Metro Manila</p>
+                </div>
+
+                <!-- If another branch is needed, uncomment this section 
+                    <div class="branch-card" data-lat="14.5890" data-lng="121.0637" data-branch="ortigas">
+                    <h4>Ortigas Center Branch</h4>
+                    <p>789 Emerald Avenue, Ortigas Center</p>
+                </div> -->
+            </div>
+            
+            <div class="map-controls">
+                <button class="map-btn" id="zoom-in">
+                    <i class="fas fa-plus"></i> Zoom In
+                </button>
+                <button class="map-btn" id="zoom-out">
+                    <i class="fas fa-minus"></i> Zoom Out
+                </button>
+                <button class="map-btn" id="locate-me">
+                    <i class="fas fa-location-arrow"></i> Locate Me
+                </button>
+            </div>
+        </div>
+        
+        <div class="branch-info">
+            <div class="branch-info-detail">
+                <h4>Imus Branch</h4>
+                <p><i class="fas fa-map-marker-alt mr-2"></i>Bgy, 2 Advincula Rd, Imus City, Cavite</p>
+                <p><i class="fas fa-phone mr-2"></i>0994-026-9565</p>
+                <p><i class="fas fa-clock mr-2"></i>Monday-Friday: 9:00 AM to 5:00 PM</p>
+                <a href="https://maps.app.goo.gl/FXBQ5ybGeYKXnzcq9" target="_blank" class="directions-btn">
+                    <i class="fas fa-directions mr-2"></i>Get Directions
+                </a>
+            </div>
+            
+            <div class="branch-info-detail">
+                <h4>Marikina City Branch</h4>
+                <p><i class="fas fa-map-marker-alt mr-2"></i>J. P. Rizal St, Marikina City, 1808 Metro Manila</p>
+                <p><i class="fas fa-phone mr-2"></i>0970-773-3562</p>
+                <p><i class="fas fa-clock mr-2"></i>Monday-Friday: 9:00 AM to 5:00 PM</p>
+                <a href="https://maps.app.goo.gl/FayMDK5Aj8jJU36n8" target="_blank" class="directions-btn">
+                    <i class="fas fa-directions mr-2"></i>Get Directions
+                </a>
+            </div>
+
+            <!-- If another branch is needed, uncomment this section 
+             <div class="branch-info-detail">   
+                <h4>Ortigas Center Branch</h4>
+                <p><i class="fas fa-map-marker-alt mr-2"></i>789 Emerald Avenue, Ortigas Center</p>
+                <p><i class="fas fa-phone mr-2"></i>(02) 8789-0123</p>
+                <p><i class="fas fa-clock mr-2"></i>Monday-Saturday: 9AM-7PM</p>
+                <a href="https://maps.google.com/?q=789+Emerald+Avenue,+Ortigas+Center" target="_blank" class="directions-btn">
+                    <i class="fas fa-directions mr-2"></i>Get Directions
+                </a>
+            </div> -->
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 py-16 md:py-20">
+        <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-900">Frequently Asked Questions</h2> <div class="max-w-4xl mx-auto space-y-6 text-gray-700">
+            <details class="border border-gray-200 rounded-md p-4 bg-white shadow-sm"> <summary class="font-semibold cursor-pointer flex items-center justify-between text-lg text-gray-800"> <span class="flex items-center"> What types of motorcycles does JMA Motorcycle offer?
+                   </span>
+                   <i class="fas fa-chevron-down text-sm ml-2 transform transition-transform duration-200"></i> </summary>
+                <p class="mt-3 text-gray-700 leading-relaxed"> JMA Motorcycle offers a wide range of motorcycles, including sportbikes, adventure bikes, scooters, and more to cater to different riding preferences.
+                </p>
+            </details>
+            <details class="border border-gray-200 rounded-md p-4 bg-white shadow-sm">
+                <summary class="font-semibold cursor-pointer flex items-center justify-between text-lg text-gray-800">
+                    <span class="flex items-center">
+                    What are the price ranges of JMA motorcycles?
+                    </span>
+                    <i class="fas fa-chevron-down text-sm ml-2 transform transition-transform duration-200"></i>
+                </summary>
+                <p class="mt-3 text-gray-700 leading-relaxed">
+                    The prices of JMA motorcycles vary depending on the model and features. Please check our vehicle listings or visit a dealership for specific pricing information.
+                </p>
+            </details>
+            <details class="border border-gray-200 rounded-md p-4 bg-white shadow-sm">
+                <summary class="font-semibold cursor-pointer flex items-center justify-between text-lg text-gray-800">
+                     <span class="flex items-center">
+                    Where can I purchase a JMA motorcycle in the Philippines?
+                     </span>
+                     <i class="fas fa-chevron-down text-sm ml-2 transform transition-transform duration-200"></i>
+                </summary>
+                <p class="mt-3 text-gray-700 leading-relaxed">
+                    You can purchase JMA motorcycles at our authorized dealerships located across the Philippines. Visit our "Find a Dealer" section for locations.
+                </p>
+            </details>
+            <details class="border border-gray-200 rounded-md p-4 bg-white shadow-sm">
+                <summary class="font-semibold cursor-pointer flex items-center justify-between text-lg text-gray-800">
+                     <span class="flex items-center">
+                    Does JMA Motorcycle offer financing options?
+                     </span>
+                     <i class="fas fa-chevron-down text-sm ml-2 transform transition-transform duration-200"></i>
+                </summary>
+                <p class="mt-3 text-gray-700 leading-relaxed">
+                    Yes, we work with various financing partners to provide flexible options for purchasing your JMA motorcycle. Please inquire at our dealerships for details.
+                </p>
+            </details>
+            <details class="border border-gray-200 rounded-md p-4 bg-white shadow-sm">
+                <summary class="font-semibold cursor-pointer flex items-center justify-between text-lg text-gray-800">
+                    <span class="flex items-center">
+                    What is the warranty on JMA motorcycles?
+                    </span>
+                    <i class="fas fa-chevron-down text-sm ml-2 transform transition-transform duration-200"></i>
+                </summary>
+                <p class="mt-3 text-gray-700 leading-relaxed">
+                    JMA motorcycles come with a standard warranty. The duration and coverage may vary by model. Please refer to your owner's manual or consult with our dealerships for warranty information.
+                </p>
+            </details>
+            <details class="border border-gray-200 rounded-md p-4 bg-white shadow-sm">
+                <summary class="font-semibold cursor-pointer flex items-center justify-between text-lg text-gray-800">
+                     <span class="flex items-center">
+                    Where can I get my JMA motorcycle serviced?
+                     </span>
+                     <i class="fas fa-chevron-down text-sm ml-2 transform transition-transform duration-200"></i>
+                </summary>
+                <p class="mt-3 text-gray-700 leading-relaxed">
+                    You can get your JMA motorcycle serviced at any of our authorized service centers nationwide. Our trained technicians will ensure your motorcycle receives the best care.
+                </p>
+            </details>
+            <details class="border border-gray-200 rounded-md p-4 bg-white shadow-sm">
+                <summary class="font-semibold cursor-pointer flex items-center justify-between text-lg text-gray-800">
+                    <span class="flex items-center">
+                    Do you offer test rides?
+                    </span>
+                    <i class="fas fa-chevron-down text-sm ml-2 transform transition-transform duration-200"></i>
+                </summary>
+                <p class="mt-3 text-gray-700 leading-relaxed">
+                    Yes, we encourage you to experience the performance and handling of our motorcycles. Please contact your nearest dealership to schedule a test ride.
+                </p>
+            </details>
+            <details class="border border-gray-200 rounded-md p-4 bg-white shadow-sm">
+                <summary class="font-semibold cursor-pointer flex items-center justify-between text-lg text-gray-800">
+                    <span class="flex items-center">
+                    What safety features are included in JMA motorcycles?
+                    </span>
+                    <i class="fas fa-chevron-down text-sm ml-2 transform transition-transform duration-200"></i>
+                </summary>
+                <p class="mt-3 text-gray-700 leading-relaxed">
+                    Safety is a priority at JMA Motorcycle. Our models come equipped with various safety features depending on the type and design. Please check the specific model details for safety features.
+                </p>
+            </details>
+            <details class="border border-gray-200 rounded-md p-4 bg-white shadow-sm">
+                <summary class="font-semibold cursor-pointer flex items-center justify-between text-lg text-gray-800">
+                     <span class="flex items-center">
+                    How can I stay updated on new JMA motorcycle models and promotions?
+                     </span>
+                     <i class="fas fa-chevron-down text-sm ml-2 transform transition-transform duration-200"></i>
+                </summary>
+                <p class="mt-3 text-gray-700 leading-relaxed">
+                    You can stay updated by visiting our website regularly, subscribing to our newsletter, and following our official social media channels.</p>
+            </details>
+             </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-300 py-12 px-4"> <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8"> <div>
+                <h3 class="text-lg font-bold text-white mb-4">JMA Motorcycle</h3>
+                <p class="text-sm leading-relaxed">Bringing high-performance motorcycles to the Philippines. Experience the ride of a lifetime with our diverse range of models.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">Quick Links</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/" class="hover:text-blue-500 transition duration-200">Home</a></li>
+                    <li><a href="/all-vehicles.html" class="hover:text-blue-500 transition duration-200">Vehicles</a></li>
+                    <li><a href="/blog.html" class="hover:text-blue-500 transition duration-200">Blog</a></li>
+                    <li><a href="/about" class="hover:text-blue-500 transition duration-200">About Us</a></li>
+                    <li><a href="/contact" class="hover:text-blue-500 transition duration-200">Contact</a></li>
+                </ul>
+            </div>
+             <div>
+                <h3 class="text-lg font-bold text-white mb-4">Legal</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/privacy-policy" class="hover:text-blue-500 transition duration-200">Privacy Policy</a></li>
+                    <li><a href="/terms-of-service" class="hover:text-blue-500 transition duration-200">Terms of Service</a></li>
+                    </ul>
+            </div>
+             <div>
+                <h3 class="text-lg font-bold text-white mb-4">Connect</h3>
+                <div class="flex space-x-4 text-xl">
+                    <a href="#" class="hover:text-blue-500 transition duration-200" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a>
+                    <a href="#" class="hover:text-blue-500 transition duration-200" aria-label="Instagram"><i class="fab fa-instagram-square"></i></a>
+                    <a href="#" class="hover:text-blue-500 transition duration-200" aria-label="Twitter"><i class="fab fa-twitter-square"></i></a>
+                    <a href="#" class="hover:text-blue-500 transition duration-200" aria-label="YouTube"><i class="fab fa-youtube-square"></i></a>
+                </div>
+                 <p class="mt-4 text-sm">&copy; 2025 JMA Motorcycle Philippines. All rights reserved.</p> </div>
+        </div>
+         <div class="text-center mt-8 text-gray-500 text-sm">
+             <p>Proudly serving the Philippine riding community.</p>
+         </div>
+    </footer>
+
+    <!-- Google Maps API -->
+    <script>
+        // Initialize Google Maps when the page loads
+        function initMap() {
+            // Default location (Makati)
+            const defaultLocation = { lat: 14.427746295671536, lng: 120.9163967519359 };
+            // Create the map centered on default location
+            const map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: defaultLocation,
+                mapTypeId: 'roadmap',
+                styles: [
+                    {
+                        featureType: "poi.business",
+                        stylers: [{ visibility: "on" }]
+                    }
+                ]
+            });
+            
+            // Store map and markers globally for access in other functions
+            window.map = map;
+            window.markers = [];
+            
+            // Create markers for each branch
+            const branches = document.querySelectorAll('.branch-card');
+            branches.forEach(branch => {
+                const lat = parseFloat(branch.dataset.lat);
+                const lng = parseFloat(branch.dataset.lng);
+                const branchName = branch.querySelector('h4').textContent;
+                
+                const marker = new google.maps.Marker({
+                    position: { lat, lng },
+                    map: map,
+                    title: branchName
+                });
+                
+                window.markers.push(marker);
+                
+                // Add click event to branch cards
+                branch.addEventListener('click', () => {
+                    // Remove active class from all branches
+                    branches.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked branch
+                    branch.classList.add('active');
+                    
+                    // Center map on this branch
+                    map.panTo({ lat, lng });
+                    map.setZoom(15);
+                    
+                    // Open info window for this marker
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: `<strong>${branchName}</strong><br>${branch.querySelector('p').textContent}`
+                    });
+                    
+                    // Close any existing info windows
+                    if (window.currentInfoWindow) {
+                        window.currentInfoWindow.close();
+                    }
+                    
+                    infoWindow.open(map, marker);
+                    window.currentInfoWindow = infoWindow;
+                });
+            });
+            
+            // Add map controls event listeners
+            document.getElementById('zoom-in').addEventListener('click', () => {
+                map.setZoom(map.getZoom() + 1);
+            });
+            
+            document.getElementById('zoom-out').addEventListener('click', () => {
+                map.setZoom(map.getZoom() - 1);
+            });
+            
+            document.getElementById('locate-me').addEventListener('click', () => {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition((position) => {
+                        const pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        
+                        map.setCenter(pos);
+                        map.setZoom(15);
+                        
+                        // Add a marker at user's location
+                        new google.maps.Marker({
+                            position: pos,
+                            map: map,
+                            title: 'Your Location',
+                            icon: {
+                                path: google.maps.SymbolPath.CIRCLE,
+                                scale: 10,
+                                fillColor: '#4285F4',
+                                fillOpacity: 1,
+                                strokeColor: '#FFFFFF',
+                                strokeWeight: 2
+                            }
+                        });
+                    }, () => {
+                        alert('Error: The Geolocation service failed.');
+                    });
+                } else {
+                    alert("Error: Your browser doesn't support geolocation.");
+                }
+            });
+        }
+        
+        // Load Google Maps API with callback
+        function loadGoogleMaps() {
+            const script = document.createElement('script');
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXdc8XHaOP734ExlNKA8Odd-VBM--QYWM&callback=initMap"
+            script.defer = true;
+            script.async = true;
+            document.head.appendChild(script);
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            loadGoogleMaps();
+            
+            // Mobile menu toggle
+            const mobileMenuButton = document.querySelector('header button');
+            const mobileMenu = document.querySelector('header .absolute');
+            
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // FAQ accordion
+            document.querySelectorAll('details summary').forEach((summary) => {
+                summary.addEventListener('click', () => {
+                    const details = summary.parentElement;
+                    const icon = summary.querySelector('.fa-chevron-down');
+                    if (details.hasAttribute('open')) {
+                        icon.classList.remove('rotate-180');
+                    } else {
+                        icon.classList.add('rotate-180');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
