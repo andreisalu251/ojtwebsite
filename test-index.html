@@ -373,7 +373,7 @@
                     <h4>Imus Branch</h4>
                     <p>Bgy, 2 Advincula Rd, Imus City, Cavite</p>
                 </div>
-                <div class="branch-card" data-lat="14.671979732351216" data-lng="1121.10890499815702" data-branch="marikina">
+                <div class="branch-card" data-lat="14.671979732351216" data-lng="121.10890499815702" data-branch="marikina">
                     <h4>Marikina Branch</h4>
                     <p>J. P. Rizal St, Marikina City, 1808 Metro Manila</p>
                 </div>
@@ -566,12 +566,14 @@
          </div>
     </footer>
 
-    <!-- Google Maps API -->
-    <script>
-        // Initialize Google Maps when the page loads
-        function initMap() {
-            // Default location (Makati)
-            const defaultLocation = { lat: 14.427746295671536, lng: 120.9163967519359 };
+<!-- Google Maps API -->
+<script>
+    // Initialize Google Maps when the page loads
+    function initMap() {
+        // Default location (Imus)
+        const defaultLocation = { lat: 14.42775668614773, lng: 120.91641820960568 };
+        
+        try {
             // Create the map centered on default location
             const map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 12,
@@ -617,7 +619,7 @@
                     
                     // Open info window for this marker
                     const infoWindow = new google.maps.InfoWindow({
-                        content: `<strong>${branchName}</strong><br>${branch.querySelector('p').textContent}`
+                        content: `<div class="p-2"><strong>${branchName}</strong><br>${branch.querySelector('p').textContent}</div>`
                     });
                     
                     // Close any existing info windows
@@ -665,49 +667,68 @@
                             }
                         });
                     }, () => {
-                        alert('Error: The Geolocation service failed.');
+                        alert('Error: The Geolocation service failed. Please ensure location services are enabled.');
+                    }, {
+                        timeout: 5000, // 5 seconds timeout
+                        maximumAge: 0, // Always get fresh location
+                        enableHighAccuracy: true
                     });
                 } else {
                     alert("Error: Your browser doesn't support geolocation.");
                 }
             });
+        } catch (error) {
+            console.error("Google Maps initialization error:", error);
+            document.getElementById('map').innerHTML = `
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center h-full flex items-center justify-center" role="alert">
+                    <p>Failed to load Google Maps. Please check your API key and internet connection.</p>
+                </div>
+            `;
         }
+    }
+    
+    // Load Google Maps API with callback
+    function loadGoogleMaps() {
+        const script = document.createElement('script');
+        // Replace YOUR_API_KEY with your actual Google Maps API key
+        script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyB_iBNV8ZTKivL0qj89cFdL0p_jlrtK0Fo&callback=initMap";
+        script.defer = true;
+        script.async = true;
+        script.onerror = function() {
+            document.getElementById('map').innerHTML = `
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center h-full flex items-center justify-center" role="alert">
+                    <p>Failed to load Google Maps API. Please check your API key.</p>
+                </div>
+            `;
+        };
+        document.head.appendChild(script);
+    }
+    
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+        loadGoogleMaps();
         
-        // Load Google Maps API with callback
-        function loadGoogleMaps() {
-            const script = document.createElement('script');
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXdc8XHaOP734ExlNKA8Odd-VBM--QYWM&callback=initMap"
-            script.defer = true;
-            script.async = true;
-            document.head.appendChild(script);
-        }
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('header button');
+        const mobileMenu = document.querySelector('header .absolute');
         
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            loadGoogleMaps();
-            
-            // Mobile menu toggle
-            const mobileMenuButton = document.querySelector('header button');
-            const mobileMenu = document.querySelector('header .absolute');
-            
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-            
-            // FAQ accordion
-            document.querySelectorAll('details summary').forEach((summary) => {
-                summary.addEventListener('click', () => {
-                    const details = summary.parentElement;
-                    const icon = summary.querySelector('.fa-chevron-down');
-                    if (details.hasAttribute('open')) {
-                        icon.classList.remove('rotate-180');
-                    } else {
-                        icon.classList.add('rotate-180');
-                    }
-                });
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // FAQ accordion
+        document.querySelectorAll('details summary').forEach((summary) => {
+            summary.addEventListener('click', () => {
+                const details = summary.parentElement;
+                const icon = summary.querySelector('.fa-chevron-down');
+                if (details.hasAttribute('open')) {
+                    icon.classList.remove('rotate-180');
+                } else {
+                    icon.classList.add('rotate-180');
+                }
             });
         });
-    </script>
-
+    });
+</script>
 </body>
 </html>
