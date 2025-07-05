@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact | JMA Motorcycle Sales Inc.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        .branch-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .branch-info-detail {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .branch-info-detail h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.15); /* Embossed effect */
+        }
+        .branch-info-detail p, .branch-info-detail a {
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+        .directions-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #2563eb;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .directions-btn:hover {
+            color: #1d4ed8;
+        }
+    </style>
+</head>
+<body class="font-montserrat bg-white text-gray-800 antialiased">
+    <!-- NAVIGATION BAR (SAME AS HOMEPAGE) -->
+    <header class="max-w-8xl mx-auto px-12 py-4 md:py-6 flex items-center justify-between bg-white shadow-sm sticky top-0 z-40">
+        <a href="/" aria-label="JMA Motorcycle Philippines Home" class="flex items-center">
+            <img src="JMA MOTO logo.jpg" alt="JMA Motorcycle Logo" class="h-8 md:h-10 mr-3">
+            <span class="text-xl md:text-2xl font-bold text-gray-900">JMA Motorcycle | MAKE IT HAPPEN</span>
+        </a>
+        <nav class="hidden md:flex space-x-6 lg:space-x-8">
+            <a href="/" class="text-gray-600 hover:text-blue-600 transition duration-200">Home</a>
+            <a href="/all-vehicles.html" class="text-gray-600 hover:text-blue-600 transition duration-200">Vehicles</a>
+            <a href="/blog.html" class="text-gray-600 hover:text-blue-600 transition duration-200">Blog</a>
+            <a href="/about.html" class="text-gray-600 hover:text-blue-600 transition duration-200">About</a>
+            <a href="/contact.html" class="text-blue-700 font-bold border-b-2 border-blue-700">Contact</a>
+        </nav>
+        <button class="md:hidden text-gray-600 hover:text-blue-600 focus:outline-none">
+            <i class="fas fa-bars text-xl"></i>
+        </button>
+    </header>
+
+    <!-- CONTACT SECTION -->
+    <section class="py-20 px-6">
+        <h2 class="text-4xl font-extrabold text-center mb-12 text-gray-900">Contact Our Branches</h2>
+        <div class="branch-info">
+            <div class="branch-info-detail">
+                <h4>Imus Branch</h4>
+                <p><i class="fas fa-map-marker-alt mr-2"></i>Bgy, 2 Advincula Rd, Imus City, Cavite</p>
+                <p><i class="fas fa-phone mr-2"></i>0994-026-9565</p>
+                <p><i class="fas fa-clock mr-2"></i>Monday-Friday: 9:00 AM to 5:00 PM</p>
+                <a href="https://maps.app.goo.gl/FXBQ5ybGeYKXnzcq9" target="_blank" class="directions-btn">
+                    <i class="fas fa-directions mr-2"></i>Get Directions
+                </a>
+            </div>
+
+            <div class="branch-info-detail">
+                <h4>Marikina City Branch</h4>
+                <p><i class="fas fa-map-marker-alt mr-2"></i>J. P. Rizal St, Marikina City, 1808 Metro Manila</p>
+                <p><i class="fas fa-phone mr-2"></i>0970-773-3562</p>
+                <p><i class="fas fa-clock mr-2"></i>Monday-Friday: 9:00 AM to 5:00 PM</p>
+                <a href="https://maps.app.goo.gl/FayMDK5Aj8jJU36n8" target="_blank" class="directions-btn">
+                    <i class="fas fa-directions mr-2"></i>Get Directions
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (SAME AS HOMEPAGE) -->
+    <footer class="bg-gray-900 text-gray-300 py-12 px-4">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">JMA Motorcycle</h3>
+                <p class="text-sm leading-relaxed">Bringing high-performance motorcycles to the Philippines. Experience the ride of a lifetime with our diverse range of models.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">Quick Links</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/" class="hover:text-blue-500 transition duration-200">Home</a></li>
+                    <li><a href="/all-vehicles.html" class="hover:text-blue-500 transition duration-200">Vehicles</a></li>
+                    <li><a href="/blog.html" class="hover:text-blue-500 transition duration-200">Blog</a></li>
+                    <li><a href="/about.html" class="hover:text-blue-500 transition duration-200">About Us</a></li>
+                    <li><a href="/contact.html" class="hover:text-blue-500 transition duration-200">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">Legal</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/privacy-policy" class="hover:text-blue-500 transition duration-200">Privacy Policy</a></li>
+                    <li><a href="/terms-of-service" class="hover:text-blue-500 transition duration-200">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">Connect</h3>
+                <div class="flex space-x-4 text-xl">
+                    <a href="#" class="hover:text-blue-500 transition duration-200" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a>
+                    <a href="#" class="hover:text-blue-500 transition duration-200" aria-label="Instagram"><i class="fab fa-instagram-square"></i></a>
+                    <a href="#" class="hover:text-blue-500 transition duration-200" aria-label="Twitter"><i class="fab fa-twitter-square"></i></a>
+                    <a href="#" class="hover:text-blue-500 transition duration-200" aria-label="YouTube"><i class="fab fa-youtube-square"></i></a>
+                </div>
+                <p class="mt-4 text-sm">&copy; 2025 JMA Motorcycle Philippines. All rights reserved.</p>
+            </div>
+        </div>
+        <div class="text-center mt-8 text-gray-500 text-sm">
+            <p>Proudly serving the Philippine riding community.</p>
+        </div>
+    </footer>
+</body>
+</html>
